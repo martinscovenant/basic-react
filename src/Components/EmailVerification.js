@@ -1,20 +1,21 @@
-import React, { useEffect, useState } from "react";
+import React, {useEffect, useState} from "react";
+import {useNavigate} from "react-router-dom";
 
 function EmailVerification() {
-    const [email, setEmail] = useState("");
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState("");
     const [successMessage, setSuccessMessage] = useState("");
+    const navigate = useNavigate();
 
+    const token = new URLSearchParams(window.location.search).get('token');
     const handleVerifyEmail = async () => {
         try {
             setLoading(true);
             const response = await fetch(
-                "https://covenant.ahmard.com/api/v1/auth/verify-email/ehl2GHOxNYeGuZxgEvmLg",
+                `https://covenant.ahmard.com/api/v1/auth/email-verification/${token}`,
                 {
                     method: "GET",
-                    headers: { "Content-Type": "application/json" },
-                    body: JSON.stringify({ email }),
+                    headers: {"Content-Type": "application/json"},
                 }
             );
             const responseData = await response.json();
@@ -22,6 +23,8 @@ function EmailVerification() {
             if (response.ok) {
                 // Email verification successful
                 setSuccessMessage("Email verification successful");
+
+                setTimeout(() => navigate('/login'), 5000)
             } else {
                 // Email verification failed
                 setError(responseData.message || "Failed to verify email");
@@ -45,9 +48,9 @@ function EmailVerification() {
     return (
         <div>
             <h2>Account Verification</h2>
-            {loading && <p style={{ color: "gray" }}>verifying your account...</p>}
-            {error && <p style={{ color: "red" }}>{error}</p>}
-            {successMessage && <p style={{ color: "green" }}>{successMessage}</p>}
+            {loading && <p style={{color: "gray"}}>verifying your account...</p>}
+            {error && <p style={{color: "red"}}>{error}</p>}
+            {successMessage && <p style={{color: "green"}}>{successMessage}</p>}
         </div>
     );
 
