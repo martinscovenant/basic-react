@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
 import './Signup.css'
 
 function SignupPage() {
@@ -11,6 +12,7 @@ function SignupPage() {
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleSignup = async () => {
     try {
@@ -31,6 +33,7 @@ function SignupPage() {
 
       if (response.ok) {
         setSuccessMessage('Registration successful');
+        setTimeout(() => navigate('/LoginPage'), 5000)
       } else {
         setError(responseData.message || 'Failed to register. Please try again.');
       }
@@ -46,54 +49,42 @@ function SignupPage() {
       {error && <p className="error-message">{error}</p>}
       {successMessage && <p className="success-message">{successMessage}</p>}
       <div className="signup-form">
-        {/* <div className="signup-input"> */}
         <label>Username:</label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-        {/* </div> */}
-      {/* <div className="signup-input"> */}
         <label>First Name:</label>
         <input
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-      {/* </div> */}
-      {/* <div className="signup-input"> */}
         <label>Last Name:</label>
         <input
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-      {/* </div> */}
-      {/* <div className="signup-input"> */}
         <label>Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      {/* </div> */}
-      {/* <div className="signup-input"> */}
         <label>Number:</label>
         <input
           type="text"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-      {/* </div> */}
-      {/* <div className="signup-input"> */}
         <label>Password:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
-      {/* </div> */}
       </div>
       <div className="center">
       <button onClick={handleSignup} className="signup-button">Signup</button>

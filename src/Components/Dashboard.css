@@ -1,48 +1,54 @@
- body{
-    background-color: aliceblue;
-    overflow: hidden;
-    box-sizing: border-box;
- }
- .dashboard {
-    background-image: url('https://images.unsplash.com/photo-1550643672-0b9a19514781');
-    background-size: cover;
-    background-position: center; 
-    height: 100vh; 
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    color: #0a0a0a; 
-  }
+.dashboard-container {
+  background-image: url('../../public/img/bg3.jpg');
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.dashboard-header {
+  text-align: center;
+  padding: 5px;
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+
+.dashboard-content {
+  flex: 1; 
+  padding: 20px;
+}
+
+.dashboard-footer {
+  text-align: center;
+  padding: 10px;
+  background-color: rgba(255, 255, 255, 0.8); 
+}
+.logout-button {
+  display: block;
+  background-color: #007bff; /* Button background color */
+  color: #fff; /* Button text color */
+  border: none; /* Remove button border */
+  border-radius: 5px; /* Button border radius */
+  padding: 10px 20px; /* Button padding */
+  cursor: pointer; /* Cursor style */
+  text-decoration: none; /* Remove underline from link */
   
-  
-  
-  .dashboard h1 {
-    font-size: 2.5rem;
-    text-align: center;
-    margin-bottom: 20px;
-  }
-  
-  
-  .container {
-    display: flex;
-    justify-content: flex-start; 
-    padding-left: 93%; 
-    margin-bottom: 50%;
-  }
-  
-  .button {
-    display: inline-block;
-    padding: 10px 20px;
-    background-color: gray ;
-    color: #fff;
-    text-decoration: none;
-    border: none;
-    border-radius: 5px;
-    
-  }
-  
-  .button:hover {
-    background-color: grey;
-  }
-  
+}
+
+.logout-button:hover {
+  background-color: #0056b3; /* Button background color on hover */
+}
+
+.logout-link {
+  color: inherit; /* Inherit text color from parent button */
+  text-decoration: none; /* Remove underline from link */
+}
+
+.logout-link:hover {
+  text-decoration: none; /* Remove underline from link on hover */
+}
+
+h2{
+  text-align: center;
+  color: black;
+}

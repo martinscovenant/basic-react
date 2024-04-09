@@ -1,13 +1,15 @@
 import React, { useState } from 'react';
+import {useNavigate} from "react-router-dom";
 import './Dashboard.css'
 
 function Logout() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
+  const navigate = useNavigate();
 
   const handleLogout = async () => {
     try {
-      const response = await fetch('https://example.com/api/logout', {
+      const response = await fetch('https://covenant.ahmard.com/api/v1/auth/logout', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -19,6 +21,7 @@ function Logout() {
 
       if (response.ok) {
         setMessage(responseData.message);
+        setTimeout(() => navigate('/LoginPage'), 5000)
       } else {
         setError(responseData.message || 'Failed to logout');
       }
@@ -33,7 +36,7 @@ function Logout() {
       <h2>Logout</h2>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogout} className="button">Logout</button>
+      <button onClick={handleLogout} className="logout-button">Logout</button>
     </div>
   );
 }
