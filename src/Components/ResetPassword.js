@@ -1,12 +1,15 @@
 import React, { useState } from 'react';
-import { Link } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
+
 
 function ResetPassword() {
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
+const token = new URLSearchParams(window.location.search).get('token');
   const handleSubmit = async (event) => {
     event.preventDefault();
     setError('');
@@ -18,19 +21,20 @@ function ResetPassword() {
     }
 
     try {
-      const response = await fetch('https://covenant.ahmard.com/api/v1/auth/reset-password/oQs5LJeLUQc0IJ-yLitTN', {
+      const response = await fetch(`https://covenant.ahmard.com/api/v1/auth/reset-password/${token}`, {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body:{
+        body:JSON.stringify({
           password,
           password_confirmation: confirmPassword
-        }
+        })
       });
 
       const responseData = await response.json();
 
       if (response.ok) {
         setSuccessMessage('Password reset successfully!');
+        setTimeout(() => navigate('/LoginPage'), 5000)
       } else {
         setError(responseData.message || 'Failed to reset password');
       }
@@ -41,20 +45,20 @@ function ResetPassword() {
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Reset Password</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
+      {error && <p  className="error-message">{error}</p>}
+      {successMessage && <p  className="success-message">{successMessage}</p>}
       <form onSubmit={handleSubmit}>
-        <div>
+        <div  className="signup-form">
           <label>Password:</label>
           <input
             type="password"
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-        </div>
-        <div>
+        
+         <div>
           <label>Confirm Password:</label>
           <input
             type="password"
@@ -62,8 +66,8 @@ function ResetPassword() {
             onChange={(e) => setConfirmPassword(e.target.value)}
           />
         </div>
-        <button type="submit">Reset Password</button>
-        <Link to="/Logout">Sign In</Link>
+        </div>
+        <button type="submit"  className="signup-button">Reset Password</button>
       </form>
     </div>
   );

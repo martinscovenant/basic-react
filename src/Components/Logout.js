@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import './Dashboard.css'
 
 function Logout() {
   const [message, setMessage] = useState('');
@@ -10,10 +11,10 @@ function Logout() {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          // You can pass any necessary data for the logout process, if required by the API
+        
         })
       });
-
+ 
       const responseData = await response.json();
 
       if (response.ok) {
@@ -28,11 +29,11 @@ function Logout() {
   };
 
   return (
-    <div>
+    <div className="cotainer">
       <h2>Logout</h2>
       {message && <p style={{ color: 'green' }}>{message}</p>}
       {error && <p style={{ color: 'red' }}>{error}</p>}
-      <button onClick={handleLogout}>Logout</button>
+      <button onClick={handleLogout} className="button">Logout</button>
     </div>
   );
 }

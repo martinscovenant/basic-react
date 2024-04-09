@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import {useNavigate} from "react-router-dom";
+import './Signup.css'
 
 function LoginPage() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
+  const navigate = useNavigate();
 
   const handleLogin = async () => {
     try {
@@ -18,32 +21,33 @@ function LoginPage() {
       const responseData = await response.json();
       
       if (response.ok) {
-        // Successful login
+        
         setSuccessMessage('Login successful');
+        setTimeout(() => navigate('/Dashboard'), 5000)
       } else {
-        // Login failed
+       
         setError(responseData.message || 'Failed to login. Please check your credentials.');
       }
     } catch (error) {
-      // Error occurred
+    
       setError('Failed to login. Please check your credentials.');
       console.error(error);
     }
   };
 
   return (
-    <div>
+    <div className="signup-container">
       <h2>Login</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      <div>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      <div className='signup-form'>
         <label>Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
+      
       <div>
         <label>Password:</label>
         <input
@@ -52,8 +56,9 @@ function LoginPage() {
           onChange={(e) => setPassword(e.target.value)}
         />
       </div>
-      <button onClick={handleLogin}>Login</button>
-      <p>Forgotten password? <Link to="/ResetPassword">Reset password</Link></p>
+      </div>
+      <button onClick={handleLogin} className="signup-button">Login</button>
+      <p  className="login-link">Forgotten password? <Link to="/PasswordReset">Reset password</Link></p>
     </div>
   );
 }

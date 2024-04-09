@@ -24,7 +24,7 @@ function EmailVerification() {
                 // Email verification successful
                 setSuccessMessage("Email verification successful");
 
-                setTimeout(() => navigate('/login'), 5000)
+                setTimeout(() => navigate('/LoginPage'), 5000)
             } else {
                 // Email verification failed
                 setError(responseData.message || "Failed to verify email");

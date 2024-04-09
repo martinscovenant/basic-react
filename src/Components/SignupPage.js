@@ -1,12 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+import './Signup.css'
 
 function SignupPage() {
   const [username, setUsername] = useState('');
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
   const [email, setEmail] = useState('');
-  const [phoneNumber, setPhoneNumber] = useState(''); // Changed variable name
+  const [phoneNumber, setPhoneNumber] = useState(''); 
   const [password, setPassword] = useState('');
   const [error, setError] = useState('');
   const [successMessage, setSuccessMessage] = useState('');
@@ -40,60 +41,64 @@ function SignupPage() {
   };
 
   return (
-    <div>
+    <div className="signup-container"> 
       <h2>Signup</h2>
-      {error && <p style={{ color: 'red' }}>{error}</p>}
-      {successMessage && <p style={{ color: 'green' }}>{successMessage}</p>}
-      <div>
+      {error && <p className="error-message">{error}</p>}
+      {successMessage && <p className="success-message">{successMessage}</p>}
+      <div className="signup-form">
+        {/* <div className="signup-input"> */}
         <label>Username:</label>
         <input
           type="text"
           value={username}
           onChange={(e) => setUsername(e.target.value)}
         />
-      </div>
-      <div>
+        {/* </div> */}
+      {/* <div className="signup-input"> */}
         <label>First Name:</label>
         <input
           type="text"
           value={firstName}
           onChange={(e) => setFirstName(e.target.value)}
         />
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div className="signup-input"> */}
         <label>Last Name:</label>
         <input
           type="text"
           value={lastName}
           onChange={(e) => setLastName(e.target.value)}
         />
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div className="signup-input"> */}
         <label>Email:</label>
         <input
           type="email"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
         />
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div className="signup-input"> */}
         <label>Number:</label>
         <input
           type="text"
           value={phoneNumber}
           onChange={(e) => setPhoneNumber(e.target.value)}
         />
-      </div>
-      <div>
+      {/* </div> */}
+      {/* <div className="signup-input"> */}
         <label>Password:</label>
         <input
           type="password"
           value={password}
           onChange={(e) => setPassword(e.target.value)}
         />
+      {/* </div> */}
       </div>
-      <button onClick={handleSignup}>Signup</button>
-      <p>Already have an account? <Link to="/signin">Sign In</Link></p>
+      <div className="center">
+      <button onClick={handleSignup} className="signup-button">Signup</button>
+     <p className="login-link">Already have an account? <Link to="/LoginPage">Sign In</Link></p>
+     </div>
     </div>
   );
 }
